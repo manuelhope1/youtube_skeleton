@@ -10,18 +10,6 @@ import UniCard from "./UniCard";
 const UniList = () => {
   const [universities, setAllUni] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  useEffect(() => {
-    fetch("http://universities.hipolabs.com/search?country=ghana")
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("alluni", JSON.stringify(data));
-        console.log(data);
-        setAllUni(data);
-      })
-      .catch((error) => {
-        console.error("Error when fetching data", error);
-      });
-  }, []);
   const startIndex = (currentPage - 1) * 5;
   const endIndex = startIndex + 5;
   const slicedUni = universities.slice(startIndex, endIndex);
@@ -31,6 +19,7 @@ const UniList = () => {
       setCurrentPage(newPage);
     }
   };
+
   const pageNumbers = [];
   if (totalPages <= 3) {
     for (let i = 1; i <= totalPages; i++) {
@@ -43,6 +32,26 @@ const UniList = () => {
   } else {
     pageNumbers.push(currentPage - 1, currentPage, currentPage + 1);
   }
+
+  useEffect(() => {
+    const savedUni = localStorage.getItem("alluni");
+    if (savedUni) {
+      const saved = JSON.parse(savedUni);
+      setAllUni(saved);
+      console.log(saved);
+    } else {
+      fetch("http://universities.hipolabs.com/search?country=ghana")
+        .then((response) => response.json())
+        .then((data) => {
+          localStorage.setItem("alluni", JSON.stringify(data));
+          console.log(data);
+          setAllUni(data);
+        })
+        .catch((error) => {
+          console.error("Error when fetching data", error);
+        });
+    }
+  }, []);
 
   return (
     <div
