@@ -10,29 +10,6 @@ import UniCard from "./UniCard";
 const UniList = () => {
   const [universities, setAllUni] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const startIndex = (currentPage - 1) * 5;
-  const endIndex = startIndex + 5;
-  const slicedUni = universities.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(universities.length / 5);
-  const changePage = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-    }
-  };
-
-  const pageNumbers = [];
-  if (totalPages <= 3) {
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(i);
-    }
-  } else if (currentPage <= 2) {
-    pageNumbers.push(1, 2, 3);
-  } else if (currentPage >= totalPages - 1) {
-    pageNumbers.push(totalPages - 2, totalPages - 1, totalPages);
-  } else {
-    pageNumbers.push(currentPage - 1, currentPage, currentPage + 1);
-  }
-
   useEffect(() => {
     const savedUni = localStorage.getItem("alluni");
     fetch("http://universities.hipolabs.com/search?country=ghana")
@@ -46,6 +23,27 @@ const UniList = () => {
         console.error("Error when fetching data", error);
       });
   }, []);
+  const startIndex = (currentPage - 1) * 5;
+  const endIndex = startIndex + 5;
+  const slicedUni = universities.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(universities.length / 5);
+  const changePage = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+  const pageNumbers = [];
+  if (totalPages <= 3) {
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+  } else if (currentPage <= 2) {
+    pageNumbers.push(1, 2, 3);
+  } else if (currentPage >= totalPages - 1) {
+    pageNumbers.push(totalPages - 2, totalPages - 1, totalPages);
+  } else {
+    pageNumbers.push(currentPage - 1, currentPage, currentPage + 1);
+  }
 
   return (
     <div
