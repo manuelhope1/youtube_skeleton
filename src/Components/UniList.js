@@ -35,21 +35,16 @@ const UniList = () => {
 
   useEffect(() => {
     const savedUni = localStorage.getItem("alluni");
-    if (savedUni) {
-      const saved = JSON.parse(savedUni);
-      setAllUni(saved);
-    } else {
-      fetch("http://universities.hipolabs.com/search?country=ghana")
-        .then((response) => response.json())
-        .then((data) => {
-          localStorage.setItem("alluni", JSON.stringify(data));
-          console.log(data);
-          setAllUni(data);
-        })
-        .catch((error) => {
-          console.error("Error when fetching data", error);
-        });
-    }
+    fetch("http://universities.hipolabs.com/search?country=ghana")
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("alluni", JSON.stringify(data));
+        console.log(data);
+        setAllUni(data);
+      })
+      .catch((error) => {
+        console.error("Error when fetching data", error);
+      });
   }, []);
 
   return (
