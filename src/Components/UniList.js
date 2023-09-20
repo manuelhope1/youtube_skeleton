@@ -44,7 +44,6 @@ const UniList = () => {
         .then((response) => response.json())
         .then((data) => {
           localStorage.setItem("alluni", JSON.stringify(data));
-          console.log(data);
           setAllUni(data);
         })
         .catch((error) => {
