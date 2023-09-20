@@ -91,6 +91,7 @@
   flex-direction: column;
   margin-top: 7px;
   border-radius: 20px;
+  z-index: 1;
 }
 .serach-log-box-icon {
   margin: 0 20px;
@@ -142,6 +143,7 @@
 }
 
 .nav-col-con {
+  width: 100%;
   margin-top: 10px;
   display: flex;
   flex-direction: row;
@@ -156,8 +158,11 @@
 }
 .left-con-sec {
   margin-left: 10px;
-  width: 210px;
-  max-height: 90vh;
+  width: 210px !important;
+  position: absolute;
+  z-index: 2;
+  background-color: black;
+  max-height: 95vh;
   overflow-y: scroll;
 }
 .left-con-sec-inner1 {
@@ -369,6 +374,45 @@
 .menuicon:hover + .notiinfo {
   display: block;
 }
+.unilist-col-con {
+  display: grid;
+  gap: 0;
+  max-height: 95vh;
+  overflow-y: scroll;
+  padding: 0 5px;
+}
+
+.uni-card {
+  min-height: 270px;
+  margin-top: 10px;
+}
+
+.pag-box {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.pag-box button {
+  color: black;
+  margin: 0 3px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.pag-box button:hover {
+  background-color: rgba(196, 196, 196, 0.871);
+}
+.active {
+  background-color: rgba(19, 125, 255, 0.791);
+  color: white !important;
+}
+.active:hover {
+  background-color: rgba(6, 60, 127, 0.758) !important;
+}
 @media (max-width: 1110px) {
   .logo-box {
     width: 20%;
@@ -550,6 +594,12 @@
 }
 
 @media (max-width: 410px) {
+  .pag-box button {
+    font-size: 10px;
+    height: 20px;
+    width: 20px;
+    color: black !important;
+  }
   .user-box div {
     margin-right: 1px;
   }
