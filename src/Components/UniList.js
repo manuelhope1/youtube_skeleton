@@ -11,7 +11,6 @@ const UniList = () => {
   const [universities, setAllUni] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
-    const savedUni = localStorage.getItem("alluni");
     fetch("http://universities.hipolabs.com/search?country=ghana")
       .then((response) => response.json())
       .then((data) => {
